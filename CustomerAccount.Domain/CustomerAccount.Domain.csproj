@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
     <PackageReference Include="MediatR" Version="10.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerAccount.CrossCutting.Exceptions\CustomerAccount.CrossCutting.Exceptions.csproj" />
+    <ProjectReference Include="..\CustomerAccount.Infrastructure.Data.Service\CustomerAccount.Infrastructure.Data.Service.csproj" />
   </ItemGroup>
 
 </Project>

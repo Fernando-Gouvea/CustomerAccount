@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
+namespace CustomerAccount.Domain.Commands.v1.Customer.DeleteCustomer
 {
     public class DeleteCustomerCommandRequest : IRequest<Unit>
     {
@@ -8,7 +8,7 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
         {
             Id = id;
         }
-                        
+
         public Guid Id { get; set; }
     }
 }

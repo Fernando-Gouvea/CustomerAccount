@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
+namespace CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer
 {
     public class UpdateCustomerCommandHandler : IRequestHandler<UpdateCustomerCommandRequest, Unit>
     {

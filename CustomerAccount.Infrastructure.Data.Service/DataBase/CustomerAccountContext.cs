@@ -1,4 +1,4 @@
-﻿using CustomerAccount.Domain.Entities;
+﻿using CustomerAccount.Infrastructure.Data.Service.DataBase.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CustomerAccount.Infrastructure.Data.Service.DataBase

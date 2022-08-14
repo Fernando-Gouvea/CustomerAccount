@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
+namespace CustomerAccount.Domain.Commands.v1.Customer.DeleteCustomer
 {
     public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommandRequest, Unit>
     {

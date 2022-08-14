@@ -1,19 +1,28 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using MediatR;
 
 namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
 {
-    public class PostCustomerCommandHandler : IRequestHandler<PostCustomerCommandRequest, Unit>
+    public class PostCustomerCommandHandler : IRequestHandler<PostCustomerCommandRequest, bool>
     {
-        private readonly IMediator _mediator;
+        private readonly CustomerAccountContext _context;
+        private readonly IMapper _mapper;
 
-        public PostCustomerCommandHandler(IMediator mediator)
+
+        public PostCustomerCommandHandler(IMapper mapper, CustomerAccountContext context)
         {
-            _mediator = mediator;
+            _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<Unit> Handle(PostCustomerCommandRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(PostCustomerCommandRequest request, CancellationToken cancellationToken)
         {
-            return new Unit();
+            var addCustomer = _mapper.Map<PostCustomerCommandRequest, Infrastructure.Data.Service.DataBase.Entities.Customer>(request);
+
+            _context.Add(addCustomer);
+
+            return _context.SaveChanges() > 0 ? true : false;
         }
     }
 }
