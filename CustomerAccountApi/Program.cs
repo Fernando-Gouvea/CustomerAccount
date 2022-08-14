@@ -12,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(typeof(PostCustomerCommandRequest).Assembly, typeof(GetCustomersQueryRequest).Assembly);
+builder.Services.AddMediatR(typeof(UpdateCustomerCommandRequest).Assembly, typeof(GetCustomersQueryRequest).Assembly);
 
 var app = builder.Build();
 

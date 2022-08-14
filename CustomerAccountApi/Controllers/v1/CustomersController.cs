@@ -47,34 +47,12 @@ namespace CustomerAccountApi.Controllers.v1
         }
 
         // PUT: api/Customers/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCustomer(string id, Customer customer)
+        public async Task<IActionResult> PutCustomer(Guid id, UpdateCustomerCommandRequest request)
         {
-            if (id != customer.Id)
-            {
-                return BadRequest();
-            }
+            request.Id = id;
 
-            _context.Entry(customer).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CustomerExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return Ok(await _mediator.Send(request));
         }
 
         [HttpPost]
@@ -85,27 +63,9 @@ namespace CustomerAccountApi.Controllers.v1
 
         // DELETE: api/Customers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCustomer(string id)
+        public async Task<IActionResult> DeleteCustomer(Guid id)
         {
-            if (_context.Customer == null)
-            {
-                return NotFound();
-            }
-            var customer = await _context.Customer.FindAsync(id);
-            if (customer == null)
-            {
-                return NotFound();
-            }
-
-            _context.Customer.Remove(customer);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool CustomerExists(string id)
-        {
-            return (_context.Customer?.Any(e => e.Id == id)).GetValueOrDefault();
+            return Ok(await _mediator.Send(new DeleteCustomerCommandRequest(id)));
         }
     }
 }
