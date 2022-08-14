@@ -1,5 +1,7 @@
 ﻿using CustomerAccount.Domain.Entities;
+using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer;
 using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,22 +11,20 @@ namespace CustomerAccountApi.Controllers.v1
     [ApiController]
     public class CustomersController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private readonly CustomerAccountContext _context;
 
-        public CustomersController(CustomerAccountContext context)
+        public CustomersController(IMediator mediator, CustomerAccountContext context)
         {
+            _mediator = mediator;
             _context = context;
         }
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Customer>>> GetCustomer()
+        public async Task<ActionResult<CustomerQueryResponse>> GetCustomer()
         {
-            if (_context.Customer == null)
-            {
-                return NotFound();
-            }
-            return await _context.Customer.ToListAsync();
+            return Ok(await _mediator.Send(new CustomerQueryRequest()));
         }
 
         // GET: api/Customers/5
