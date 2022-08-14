@@ -1,32 +1,32 @@
 ﻿using MediatR;
 using Newtonsoft.Json;
 
-namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer
+namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers
 {
-    public class CustomerQueryResponse : IRequest<CustomerQueryRequest>
+    public class GetCustomersQueryResponse
     {
         public IEnumerable<CustomerResponse> Customers { get; set; }
         public class CustomerResponse
         {
-            [JsonProperty("id")] 
+            [JsonProperty("id")]
             public Guid Id { get; set; }
-            
-            [JsonProperty("name")] 
+
+            [JsonProperty("name")]
             public string Name { get; set; }
-            
-            [JsonProperty("old")] 
+
+            [JsonProperty("old")]
             public string Old { get; set; }
-            
-            [JsonProperty("civilStatus")] 
+
+            [JsonProperty("civilStatus")]
             public string CivilStatus { get; set; }
-            
-            [JsonProperty("document")] 
+
+            [JsonProperty("document")]
             public string Document { get; set; }
-            
-            [JsonProperty("city")] 
+
+            [JsonProperty("city")]
             public string City { get; set; }
-            
-            [JsonProperty("state")] 
+
+            [JsonProperty("state")]
             public string State { get; set; }
         }
     }

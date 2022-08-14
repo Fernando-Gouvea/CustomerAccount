@@ -1,4 +1,5 @@
-﻿using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer;
+﻿using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
+using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers;
 using CustomerAccount.Infrastructure.Data.Service.DataBase;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddMediatR(typeof(CustomerQueryRequest).Assembly);
+builder.Services.AddMediatR(typeof(PostCustomerCommandRequest).Assembly, typeof(GetCustomersQueryRequest).Assembly);
 
 var app = builder.Build();
 

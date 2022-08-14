@@ -1,5 +1,6 @@
-﻿using CustomerAccount.Domain.Entities;
-using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer;
+﻿using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
+using CustomerAccount.Domain.Entities;
+using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers;
 using CustomerAccount.Infrastructure.Data.Service.DataBase;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -22,9 +23,9 @@ namespace CustomerAccountApi.Controllers.v1
 
         // GET: api/Customers
         [HttpGet]
-        public async Task<ActionResult<CustomerQueryResponse>> GetCustomer()
+        public async Task<ActionResult<GetCustomersQueryResponse>> GetCustomer()
         {
-            return Ok(await _mediator.Send(new CustomerQueryRequest()));
+            return Ok(await _mediator.Send(new GetCustomersQueryRequest()));
         }
 
         // GET: api/Customers/5
@@ -76,33 +77,10 @@ namespace CustomerAccountApi.Controllers.v1
             return NoContent();
         }
 
-        // POST: api/Customers
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Customer>> PostCustomer(Customer customer)
+        public async Task<ActionResult<Unit>> PostCustomer(PostCustomerCommandRequest request)
         {
-            if (_context.Customer == null)
-            {
-                return Problem("Entity set 'CustomerAccountContext.Customer'  is null.");
-            }
-            _context.Customer.Add(customer);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (CustomerExists(customer.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtAction("GetCustomer", new { id = customer.Id }, customer);
+            return Ok(await _mediator.Send(request));
         }
 
         // DELETE: api/Customers/5
