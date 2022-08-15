@@ -1,9 +1,11 @@
-﻿using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
+﻿using CustomerAccount.CrossCutting.Exceptions;
+using CustomerAccount.Domain.Commands.MapperProfiles.v1;
+using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
+using CustomerAccount.Infrastructure.Data.Query.Query.MapperProfiles.v1;
 using CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers;
 using CustomerAccount.Infrastructure.Data.Service.DataBase;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Podosys.ServiceData.Domain.MapperProfiles.v1;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<CustomerAccountContext>(options =>
@@ -27,6 +29,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware(typeof(MiddlewareError));
 
 app.UseAuthorization();
 

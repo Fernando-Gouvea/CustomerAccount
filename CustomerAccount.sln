@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.Infrastruct
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.CrossCutting.Configuration", "CustomerAccount.CrossCutting.Configuration\CustomerAccount.CrossCutting.Configuration.csproj", "{58CDCCB7-A2BD-403F-A827-F6CF3D66ABE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerAccount.CrossCutting.Exception", "CustomerAccount.CrossCutting.Exception\CustomerAccount.CrossCutting.Exception.csproj", "{8B94ACD3-2C25-4A57-ABA7-D6B60DF9A135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.CrossCutting.Exceptions", "CustomerAccount.CrossCutting.Exception\CustomerAccount.CrossCutting.Exceptions.csproj", "{8B94ACD3-2C25-4A57-ABA7-D6B60DF9A135}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
