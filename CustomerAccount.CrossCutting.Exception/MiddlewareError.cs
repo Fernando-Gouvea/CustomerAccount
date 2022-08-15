@@ -26,16 +26,33 @@ namespace CustomerAccount.CrossCutting.Exceptions
 
         private Task HandleExceptionAsync(HttpContext context, Exception ex)
         {
-            ErrorResponse errorResponse;
+            context.Response.StatusCode = ExceptionFilter(ex);
 
-            errorResponse = new ErrorResponse(HttpStatusCode.InternalServerError.ToString(),
-                                                  $"{ex.Message} {ex?.InnerException?.Message}");
-
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            var errorResponse = new ErrorResponse(ex.Message);
 
             var result = JsonConvert.SerializeObject(errorResponse);
+
             context.Response.ContentType = "application/json";
+
             return context.Response.WriteAsync(result);
+        }
+
+        private int ExceptionFilter(Exception ex)
+        {
+            switch (ex.Message)
+            {
+                case "NotFound":
+                    return (int)HttpStatusCode.NotFound;
+
+                case "UnprocessableEntity":
+                    return (int)HttpStatusCode.UnprocessableEntity;
+
+                case "BadRequest":
+                    return (int)HttpStatusCode.BadRequest;
+
+                default:
+                    return (int)HttpStatusCode.InternalServerError;
+            }
         }
     }
 }

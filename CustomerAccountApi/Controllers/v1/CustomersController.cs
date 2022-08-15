@@ -29,19 +29,19 @@ namespace CustomerAccountApi.Controllers.v1
         {
             request.Id = id;
 
-            return await _mediator.Send(request) ? StatusCode(201) : StatusCode(422, "UpdateCustomerException");
+            return Ok(await _mediator.Send(request));
         }
 
         [HttpPost("customer")]
         public async Task<ActionResult> PostCustomer(PostCustomerCommandRequest request)
         {
-            return await _mediator.Send(request) ? StatusCode(201) : StatusCode(422, "PostCustomerException");
+            return Ok(await _mediator.Send(request));
         }
 
         [HttpDelete("customer/{id}")]
         public async Task<IActionResult> DeleteCustomer(Guid id)
         {
-            return await _mediator.Send(new DeleteCustomerCommandRequest(id)) ? StatusCode(201) : StatusCode(422, "DeleteCustomerException");
+            return Ok(await _mediator.Send(new DeleteCustomerCommandRequest(id)));
         }
     }
 }

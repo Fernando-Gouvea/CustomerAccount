@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer
 {
-    public class UpdateCustomerCommandRequest : IRequest<bool>
+    public class UpdateCustomerCommandRequest : IRequest<Unit>
     {
         public Guid Id { get; set; }
 

@@ -2,6 +2,7 @@
 using CustomerAccount.Infrastructure.Data.Service.DataBase;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers
 {
@@ -25,14 +26,7 @@ namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustome
                 .ToListAsync();
 
             if (!customers.Any())
-                throw new ArgumentException("Exceção ocorrida ao obter os alunos.");
-
-
-            //throw HttpStatusCode.BadRequest;
-
-            // return new HttpRequestException("Nothing Found");
-            // throw new HttpRequestException("Nothing Found", HttpStatusCode.NotFound);
-
+                throw new Exception(HttpStatusCode.NotFound.ToString());
 
             var getCustomersResponse = _mapper.Map<List<Service.DataBase.Entities.Customer>, IEnumerable<GetCustomersQueryResponse>>(customers);
 
