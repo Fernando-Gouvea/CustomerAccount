@@ -1,19 +1,38 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustomers
 {
-    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQueryRequest, GetCustomersQueryResponse>
+    public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQueryRequest, IEnumerable<GetCustomersQueryResponse>>
     {
-        private readonly IMediator _mediator;
+        private readonly CustomerAccountContext _context;
+        private readonly IMapper _mapper;
 
-        public GetCustomersQueryHandler(IMediator mediator)
+        public GetCustomersQueryHandler(IMapper mapper, CustomerAccountContext context)
         {
-            _mediator = mediator;
+            _context = context;
+            _mapper = mapper;
         }
 
-        public async Task<GetCustomersQueryResponse> Handle(GetCustomersQueryRequest request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<GetCustomersQueryResponse>> Handle(GetCustomersQueryRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var customers = await _context.Customer
+                .AsNoTracking()
+                .Skip(request.Skip)
+                .Take(request.Take)
+                .ToListAsync();
+
+            if (!customers.Any())
+                return new HttpRequestException("Nothing Found");
+               // throw new HttpRequestException("Nothing Found", HttpStatusCode.NotFound);
+
+
+            var getCustomersResponse = _mapper.Map<List<Service.DataBase.Entities.Customer>, IEnumerable<GetCustomersQueryResponse>>(customers);
+
+            return getCustomersResponse;
         }
     }
 }

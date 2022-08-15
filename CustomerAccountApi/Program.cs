@@ -13,6 +13,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(typeof(CustomerQueryRequestProfile));
 builder.Services.AddAutoMapper(typeof(CustomerCommandRequestProfile));
 builder.Services.AddMediatR(typeof(UpdateCustomerCommandRequest).Assembly, typeof(GetCustomersQueryRequest).Assembly);
 

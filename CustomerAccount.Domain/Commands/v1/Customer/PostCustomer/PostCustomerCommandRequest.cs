@@ -6,7 +6,7 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
     public class PostCustomerCommandRequest : IRequest<bool>
     {
         [JsonProperty("id")]
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
         [JsonProperty("name")]
         public string Name { get; set; }

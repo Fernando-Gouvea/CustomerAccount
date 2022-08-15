@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
+using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
 using CustomerAccount.Infrastructure.Data.Service.DataBase.Entities;
 
 namespace Podosys.ServiceData.Domain.MapperProfiles.v1
@@ -9,6 +10,7 @@ namespace Podosys.ServiceData.Domain.MapperProfiles.v1
         public CustomerCommandRequestProfile()
         {
             CreateMap<PostCustomerCommandRequest, Customer>();
+            CreateMap<UpdateCustomerCommandRequest, Customer>();
         }
     }
 }

@@ -1,19 +1,32 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
+using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerAccount.Domain.Commands.v1.Customer.DeleteCustomer
 {
-    public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommandRequest, Unit>
+    public class DeleteCustomerCommandHandler : IRequestHandler<DeleteCustomerCommandRequest, bool>
     {
-        private readonly IMediator _mediator;
-
-        public DeleteCustomerCommandHandler(IMediator mediator)
+        private readonly CustomerAccountContext _context;
+       
+        public DeleteCustomerCommandHandler(CustomerAccountContext context)
         {
-            _mediator = mediator;
+            _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteCustomerCommandRequest request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(DeleteCustomerCommandRequest request, CancellationToken cancellationToken)
         {
-            return new Unit();
+            var customer = await _context.Customer
+                .Where(x => x.Id.Equals(request.Id))
+                .FirstOrDefaultAsync();
+
+            if (customer == null)
+                return false;
+
+            _context.Customer.Remove(customer);
+
+            return _context.SaveChanges() > 0 ? true : false;
         }
     }
 }

@@ -18,10 +18,10 @@ namespace CustomerAccountApi.Controllers.v1
             _mediator = mediator;
         }
 
-        [HttpGet("customers")]
-        public async Task<ActionResult<GetCustomersQueryResponse>> GetCustomer()
+        [HttpGet("customers/{skip}/{take}")]
+        public async Task<ActionResult<IEnumerable<GetCustomersQueryResponse>>> GetCustomer([FromRoute]int skip, [FromRoute]int take)
         {
-            return Ok(await _mediator.Send(new GetCustomersQueryRequest()));
+            return Ok(await _mediator.Send(new GetCustomersQueryRequest(skip, take)));
         }
 
         [HttpPut("update/{id}")]
@@ -29,19 +29,19 @@ namespace CustomerAccountApi.Controllers.v1
         {
             request.Id = id;
 
-            return Ok(await _mediator.Send(request));
+            return await _mediator.Send(request) ? StatusCode(201) : StatusCode(422, "UpdateCustomerException");
         }
 
         [HttpPost("customer")]
-        public async Task<ActionResult<Unit>> PostCustomer(PostCustomerCommandRequest request)
+        public async Task<ActionResult> PostCustomer(PostCustomerCommandRequest request)
         {
-            return await _mediator.Send(request) ? StatusCode(201) : StatusCode(422, "PostCustomerCommandException");
+            return await _mediator.Send(request) ? StatusCode(201) : StatusCode(422, "PostCustomerException");
         }
 
         [HttpDelete("customer/{id}")]
         public async Task<IActionResult> DeleteCustomer(Guid id)
         {
-            return Ok(await _mediator.Send(new DeleteCustomerCommandRequest(id)));
+            return await _mediator.Send(new DeleteCustomerCommandRequest(id)) ? StatusCode(201) : StatusCode(422, "DeleteCustomerException");
         }
     }
 }

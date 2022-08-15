@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CustomerAccount.CrossCutting.Exceptions\CustomerAccount.CrossCutting.Exceptions.csproj" />
     <ProjectReference Include="..\CustomerAccount.Infrastructure.Data.Service\CustomerAccount.Infrastructure.Data.Service.csproj" />
   </ItemGroup>
 
