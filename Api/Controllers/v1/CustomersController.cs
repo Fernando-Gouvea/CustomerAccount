@@ -24,7 +24,7 @@ namespace CustomerAccountApi.Controllers.v1
             return Ok(await _mediator.Send(new GetCustomersQueryRequest(skip, take)));
         }
 
-        [HttpPut("update/{id}")]
+        [HttpPut("customer/update/{id}")]
         public async Task<IActionResult> PutCustomer(Guid id, UpdateCustomerCommandRequest request)
         {
             request.Id = id;
