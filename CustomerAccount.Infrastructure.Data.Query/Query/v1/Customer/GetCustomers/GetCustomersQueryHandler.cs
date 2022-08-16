@@ -8,10 +8,17 @@ namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustome
 {
     public class GetCustomersQueryHandler : IRequestHandler<GetCustomersQueryRequest, IEnumerable<GetCustomersQueryResponse>>
     {
-        private readonly CustomerAccountContext _context;
+        private readonly IDbfuncions _context;
+       // private readonly CustomerAccountContext _context;
         private readonly IMapper _mapper;
 
-        public GetCustomersQueryHandler(IMapper mapper, CustomerAccountContext context)
+        //public GetCustomersQueryHandler(IMapper mapper, CustomerAccountContext context)
+        //{
+        //    _context = context;
+        //    _mapper = mapper;
+        //}
+
+        public GetCustomersQueryHandler(IMapper mapper, IDbfuncions context)
         {
             _context = context;
             _mapper = mapper;
@@ -19,11 +26,7 @@ namespace CustomerAccount.Infrastructure.Data.Query.Query.v1.Customer.GetCustome
 
         public async Task<IEnumerable<GetCustomersQueryResponse>> Handle(GetCustomersQueryRequest request, CancellationToken cancellationToken)
         {
-            var customers = await _context.Customer
-                .AsNoTracking()
-                .Skip(request.Skip)
-                .Take(request.Take)
-                .ToListAsync();
+            var customers = await _context.GetCustomerAsync();
 
             if (!customers.Any())
                 throw new Exception(HttpStatusCode.NotFound.ToString());
