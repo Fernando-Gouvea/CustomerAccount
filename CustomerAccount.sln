@@ -25,9 +25,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.CrossCuttin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5-Tests", "5-Tests", "{C3A2179D-78F3-4270-9616-8B267D608C9C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.Query.Tests", "CustomerAccount.Query.Tests\CustomerAccount.Query.Tests.csproj", "{4E011D59-9D15-477A-8BC7-21E53202FD14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerAccount.Query.Tests", "Infrastructure.Query.Tests\CustomerAccount.Query.Tests.csproj", "{4E011D59-9D15-477A-8BC7-21E53202FD14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerAccount.Domain.Tests", "CustomerAccount.Domain.Tests\CustomerAccount.Domain.Tests.csproj", "{5BF9FB0C-D4F8-4040-9596-54D3733C9B8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerAccount.Domain.Tests", "Domain.Tests\CustomerAccount.Domain.Tests.csproj", "{5BF9FB0C-D4F8-4040-9596-54D3733C9B8A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
