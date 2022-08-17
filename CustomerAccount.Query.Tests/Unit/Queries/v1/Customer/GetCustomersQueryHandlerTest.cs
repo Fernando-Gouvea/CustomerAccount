@@ -1,22 +1,23 @@
 ﻿using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
 using CustomerAccount.Infrastructure.Query.Tests.Unit.Queries.v1.Customer.Mocks.Context;
 using CustomerAccount.Infrastructure.Query.Tests.Unit.Queries.v1.Customer.Mocks.Mapper;
+using NUnit.Framework;
 
 namespace CustomerAccount.Infrastructure.Query.Tests.Unit.Queries.v1.Customer
 {
     public sealed class GetCustomersQueryHandlerTest
     {
         [Test]
-        public void Test1()
+        public void GetCustomer_ShouldRetunCustomers()
         {
-            var map = MapperMock.GetMock();
+            var mapper = MapperMock.GetMock();
 
-            var con = MockContext.MockContextRepository();
+            var repository = MockContext.MockContextRepository();
 
-            var handler = new GetCustomersQueryHandler(map, con);
-            var result = handler.Handle(new GetCustomersQueryRequest(1, 5), CancellationToken.None);
+            var handler = new GetCustomersQueryHandler(mapper, repository);
+            var response = handler.Handle(new GetCustomersQueryRequest(1, 5), CancellationToken.None);
 
-            Assert.IsNotEmpty(result.Result);
+            Assert.IsNotEmpty(response.Result);
         }
     }
 }
