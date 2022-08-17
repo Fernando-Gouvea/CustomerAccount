@@ -4,6 +4,7 @@ using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
 using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace CustomerAccountApi.Controllers.v1
 {
@@ -25,6 +26,7 @@ namespace CustomerAccountApi.Controllers.v1
         }
 
         [HttpPut("customer/update/{id}")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<IActionResult> PutCustomer(Guid id, UpdateCustomerCommandRequest request)
         {
             request.Id = id;
@@ -33,6 +35,7 @@ namespace CustomerAccountApi.Controllers.v1
         }
 
         [HttpPost("customer")]
+        [ProducesResponseType((int)HttpStatusCode.Created)]
         public async Task<ActionResult> PostCustomer(PostCustomerCommandRequest request)
         {
             return Created("", await _mediator.Send(request));
