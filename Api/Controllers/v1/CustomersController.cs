@@ -19,7 +19,7 @@ namespace CustomerAccountApi.Controllers.v1
         }
 
         [HttpGet("customers/{skip}/{take}")]
-        public async Task<ActionResult<IEnumerable<GetCustomersQueryResponse>>> GetCustomer([FromRoute]int skip, [FromRoute]int take)
+        public async Task<ActionResult<IEnumerable<GetCustomersQueryResponse>>> GetCustomer([FromRoute] int skip, [FromRoute] int take)
         {
             return Ok(await _mediator.Send(new GetCustomersQueryRequest(skip, take)));
         }
@@ -29,13 +29,13 @@ namespace CustomerAccountApi.Controllers.v1
         {
             request.Id = id;
 
-            return Ok(await _mediator.Send(request));
+            return Created("", await _mediator.Send(request));
         }
 
         [HttpPost("customer")]
         public async Task<ActionResult> PostCustomer(PostCustomerCommandRequest request)
         {
-            return Ok(await _mediator.Send(request));
+            return Created("", await _mediator.Send(request));
         }
 
         [HttpDelete("customer/{id}")]
