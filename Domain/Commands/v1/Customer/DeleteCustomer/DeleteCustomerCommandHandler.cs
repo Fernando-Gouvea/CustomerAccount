@@ -20,7 +20,7 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.DeleteCustomer
             if (customer == null)
                 throw new Exception(HttpStatusCode.NotFound.ToString());
 
-            return await _repository.DeleteCustomerAsync(customer) > 0 ? new Unit() : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
+            return await _repository.DeleteCustomerAsync(customer) > 0 ? Unit.Value : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
         }
     }
 }

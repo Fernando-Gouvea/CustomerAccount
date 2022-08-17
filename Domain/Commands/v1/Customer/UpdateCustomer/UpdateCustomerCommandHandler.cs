@@ -20,7 +20,7 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer
         {
             var customer = _mapper.Map<UpdateCustomerCommandRequest, Infrastructure.Data.Service.Repository.Entities.Customer>(request);
 
-            return await _repository.UpdateCustomerAsync(customer) > 0 ? new Unit() : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
+            return await _repository.UpdateCustomerAsync(customer) > 0 ? Unit.Value : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
         }
     }
 }

@@ -23,7 +23,7 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
             if (customer == null)
                 throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
 
-            return await _repository.AddCustomerAsync(customer) > 0 ? new Unit() : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
+            return await _repository.AddCustomerAsync(customer) > 0 ? Unit.Value : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
         }
     }
 }
