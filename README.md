@@ -39,6 +39,12 @@
 		```json 
 		{ }
 		```
+		* *422 - UnprocessableEntity*           
+		```json 
+		{
+           UnprocessableEntity
+		}
+		```
 
 #### - Post Customer v1.
 
@@ -69,8 +75,14 @@
 		```json 
 		{ }
 		```
+        * *422 - UnprocessableEntity*           
+		```json 
+		{
+           UnprocessableEntity
+		}
+		```
 
-#### - Post Customer v1.
+#### - Update Customer v1.
 
 - [ *PUT* /api/customeraccount/v1/customer/update/{id}" ]
 
@@ -98,6 +110,12 @@
 		* *200 - OK*           
 		```json 
 		{ }
+		```
+		* *422 - UnprocessableEntity*           
+		```json 
+		{
+           UnprocessableEntity
+		}
 		```
 
 #### - Get Customers v1
@@ -131,4 +149,10 @@
               "state": "string"
            }
 		]
+		```
+		* *404 - NotFound*           
+		```json 
+		{
+           NotFound
+		}
 		```
