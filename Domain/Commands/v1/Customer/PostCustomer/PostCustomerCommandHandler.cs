@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using CustomerAccount.Infrastructure.Data.Service.Repository;
 using MediatR;
 using System.Net;
 
@@ -7,22 +7,23 @@ namespace CustomerAccount.Domain.Commands.v1.Customer.PostCustomer
 {
     public class PostCustomerCommandHandler : IRequestHandler<PostCustomerCommandRequest, Unit>
     {
-        private readonly CustomerAccountContext _context;
+        private readonly IRepository _repository;
         private readonly IMapper _mapper;
 
-        public PostCustomerCommandHandler(IMapper mapper, CustomerAccountContext context)
+        public PostCustomerCommandHandler(IMapper mapper, IRepository repository)
         {
-            _context = context;
+            _repository = repository;
             _mapper = mapper;
         }
 
         public async Task<Unit> Handle(PostCustomerCommandRequest request, CancellationToken cancellationToken)
         {
-            var addCustomer = _mapper.Map<PostCustomerCommandRequest, Infrastructure.Data.Service.DataBase.Entities.Customer>(request);
+            var customer = _mapper.Map<PostCustomerCommandRequest, Infrastructure.Data.Service.Repository.Entities.Customer>(request);
 
-            _context.Customer.Add(addCustomer);
+            if (customer == null)
+                throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
 
-            return _context.SaveChanges() > 0 ? new Unit() : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
+            return await _repository.AddCustomerAsync(customer) > 0 ? new Unit() : throw new Exception(HttpStatusCode.UnprocessableEntity.ToString());
         }
     }
 }

@@ -2,9 +2,9 @@
 using AutoMapper;
 using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
 using NSubstitute;
-using CustomerDB = CustomerAccount.Infrastructure.Data.Service.DataBase.Entities.Customer;
+using CustomerDB = CustomerAccount.Infrastructure.Data.Service.Repository.Entities.Customer;
 
-namespace CustomerAccount.Infrastructure.Query.Tests.Unit.Queries.v1.Customer.Mocks.Mapper
+namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.GetCustomers.Mocks.Mapper
 {
     public class MapperMock
     {
