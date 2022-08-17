@@ -3,7 +3,7 @@ using CustomerAccount.Domain.Commands.MapperProfiles.v1;
 using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
 using CustomerAccount.Infrastructure.Data.Query.Queries.MapperProfiles.v1;
 using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
-using CustomerAccount.Infrastructure.Data.Service.DataBase;
+using CustomerAccount.Infrastructure.Data.Service.Repository;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(typeof(CustomerQueryRequestProfile));
 builder.Services.AddAutoMapper(typeof(CustomerCommandRequestProfile));
 builder.Services.AddMediatR(typeof(UpdateCustomerCommandRequest).Assembly, typeof(GetCustomersQueryRequest).Assembly);
-builder.Services.AddTransient<IDbfuncions, Dbfuncions>();
+builder.Services.AddTransient<IRepository, Repository>();
 
 var app = builder.Build();
 

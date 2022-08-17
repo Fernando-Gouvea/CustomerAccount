@@ -1,7 +1,7 @@
-﻿using CustomerAccount.Infrastructure.Data.Service.DataBase.Entities;
+﻿using CustomerAccount.Infrastructure.Data.Service.Repository.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CustomerAccount.Infrastructure.Data.Service.DataBase
+namespace CustomerAccount.Infrastructure.Data.Service.Repository
 {
     public class CustomerAccountContext : DbContext
     {

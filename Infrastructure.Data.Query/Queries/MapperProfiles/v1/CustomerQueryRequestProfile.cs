@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
-using CustomerAccount.Infrastructure.Data.Service.DataBase.Entities;
+using CustomerAccount.Infrastructure.Data.Service.Repository.Entities;
 
 namespace CustomerAccount.Infrastructure.Data.Query.Queries.MapperProfiles.v1
 {

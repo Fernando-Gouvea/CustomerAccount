@@ -1,4 +1,4 @@
-﻿namespace CustomerAccount.Infrastructure.Data.Service.DataBase.Entities
+﻿namespace CustomerAccount.Infrastructure.Data.Service.Repository.Entities
 {
     public class Customer
     {
