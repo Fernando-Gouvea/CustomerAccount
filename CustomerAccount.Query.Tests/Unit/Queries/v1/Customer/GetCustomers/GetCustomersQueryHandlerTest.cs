@@ -3,7 +3,7 @@ using CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.Mocks.Mapper;
 using CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.Mocks.Repository;
 using NUnit.Framework;
 
-namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer
+namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.GetCustomers
 {
     public sealed class GetCustomersQueryHandlerTest
     {
@@ -17,7 +17,7 @@ namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer
             var handler = new GetCustomersQueryHandler(mapper, repository);
             var response = handler.Handle(new GetCustomersQueryRequest(1, 5), CancellationToken.None);
 
-            Assert.IsNotEmpty(response.Result);
+            Assert.IsNotNull(response);
         }
     }
 }
