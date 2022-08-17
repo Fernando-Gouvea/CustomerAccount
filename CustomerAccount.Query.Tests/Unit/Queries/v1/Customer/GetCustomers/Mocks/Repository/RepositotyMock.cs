@@ -3,7 +3,7 @@ using CustomerAccount.Infrastructure.Data.Service.Repository;
 using NSubstitute;
 using CustomerDB = CustomerAccount.Infrastructure.Data.Service.Repository.Entities.Customer;
 
-namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.Mocks.Repository
+namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.GetCustomers.Mocks.Repository
 {
     public class RepositotyMock
     {

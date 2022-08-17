@@ -1,10 +1,10 @@
 ﻿using AutoFixture;
 using AutoMapper;
-using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
+using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
 using NSubstitute;
 using CustomerDB = CustomerAccount.Infrastructure.Data.Service.Repository.Entities.Customer;
 
-namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.GetCustomers.Mocks.Mapper
+namespace CustomerAccount.Domain.Tests.Unit.Domain.v1.Customer.PostCustomer.Mocks.Mapper
 {
     public class MapperMock
     {
@@ -14,7 +14,7 @@ namespace CustomerAccount.Query.Tests.Unit.Queries.v1.Customer.GetCustomers.Mock
 
             var fixture = new Fixture();
 
-            mock.Map<List<CustomerDB>, IEnumerable<GetCustomersQueryResponse>>(Arg.Any<List<CustomerDB>>()).Returns(fixture.Create<List<GetCustomersQueryResponse>>());
+            mock.Map<PostCustomerCommandRequest, CustomerDB>(Arg.Any<PostCustomerCommandRequest>()).Returns(fixture.Create<CustomerDB>());
 
             return mock;
         }
