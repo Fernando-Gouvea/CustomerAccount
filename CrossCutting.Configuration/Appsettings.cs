@@ -6,8 +6,5 @@ namespace CustomerAccount.CrossCutting.Configuration
     {
         public static Appsettings Settings =>
             JsonConvert.DeserializeObject<Appsettings>(new StreamReader(@"appsettings.JSON").ReadToEnd());
-
-        [JsonProperty("subscriptionKey")]
-        public string SubscriptionKey { get; set; }
     }
 }
