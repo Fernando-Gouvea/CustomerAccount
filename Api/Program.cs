@@ -17,7 +17,9 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-options.AddPolicy("MyCors", buider => buider.WithOrigins("*"));
+    options.AddPolicy("MyCors", buider => buider.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 });
 
 builder.Services.AddAutoMapper(typeof(CustomerQueryRequestProfile));
