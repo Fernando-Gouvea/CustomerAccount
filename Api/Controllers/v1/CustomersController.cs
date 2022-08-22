@@ -3,12 +3,14 @@ using CustomerAccount.Domain.Commands.v1.Customer.PostCustomer;
 using CustomerAccount.Domain.Commands.v1.Customer.UpdateCustomer;
 using CustomerAccount.Infrastructure.Data.Query.Queries.v1.Customer.GetCustomers;
 using MediatR;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace CustomerAccountApi.Controllers.v1
 {
     [Route("api/customeraccount/v1")]
+    [EnableCors("MyCors")]
     [ApiController]
     public class CustomersController : ControllerBase
     {

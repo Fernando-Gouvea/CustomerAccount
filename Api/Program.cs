@@ -15,6 +15,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+options.AddPolicy("MyCors", buider => buider.WithOrigins("*"));
+});
 
 builder.Services.AddAutoMapper(typeof(CustomerQueryRequestProfile));
 builder.Services.AddAutoMapper(typeof(CustomerCommandRequestProfile));
@@ -32,6 +36,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseMiddleware(typeof(MiddlewareError));
+
+app.UseCors("MyCors");
 
 app.UseAuthorization();
 
