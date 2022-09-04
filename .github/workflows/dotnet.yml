@@ -20,9 +20,6 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-
-    - name: Get latest code
-      uses: actions/checkout@v2
     
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
