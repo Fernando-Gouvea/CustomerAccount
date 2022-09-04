@@ -23,7 +23,7 @@ jobs:
     - name: Get latest code
       uses: actions/setup-dotnet@v2
     - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      uses: ./
       with:
         server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_user }}
