@@ -109,7 +109,7 @@
 	- **Response:**
 		* *201 - Created*           
 		```json 
-		{ }
+		{ } 
 		```
 		* *422 - UnprocessableEntity*           
 		```json 
