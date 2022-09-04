@@ -28,6 +28,6 @@ jobs:
         server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
-        local-dir: ./
+        local-dir: ./Api/
         server-dir: customerapi/
       
