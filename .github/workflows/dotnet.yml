@@ -20,10 +20,9 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
-    - name: Get latest code
-      uses: actions/setup-dotnet@v2
+   
     - name: Sync Files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.1
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_user }}
