@@ -23,9 +23,11 @@ jobs:
     - name: Get latest code
       uses: actions/setup-dotnet@v2
     - name: Sync Files
-      uses: SamKirkland/web-deploy@v1
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
+        local-dir: ./myFolderToPublish/
         server-dir: customerapi/
+      
