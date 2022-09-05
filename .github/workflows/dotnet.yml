@@ -18,7 +18,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --framework netcoreapp6.0 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
+        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
       - name: Test with .NET
         run: dotnet test
