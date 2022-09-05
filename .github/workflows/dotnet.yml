@@ -27,15 +27,15 @@ jobs:
     - name: Get latest code
       uses: actions/setup-dotnet@v2
 
-    - name: Upload from public_html via FTP
-      uses: airvzxf/ftp-deployment-action@latest
+    - name: Get latest code
+      uses: kevinpainchaud/simple-ftp-deploy-action@v1.2.0
       with:
-          server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "./public"
-          remote_dir: "customerapi"
-          delete: "true"
+        ftp_host: ${{ secrets.ftp_server }}
+        ftp_username: ${{ secrets.ftp_user }}
+        ftp_password: ${{ secrets.ftp_password }}
+        local_source_dir: "./publish/"
+        dist_target_dir: "wcustomerapi/"
+        delete: "true"
         
           #
     #- name: Sync Files
