@@ -9,7 +9,7 @@ using System.Net;
 
 namespace CustomerAccountApi.Controllers.v1
 {
-    [Route("api/customeraccoun/v1")]
+    [Route("api/customeraccount/v1")]
     [EnableCors("MyCors")]
     [ApiController]
     public class CustomersController : ControllerBase
