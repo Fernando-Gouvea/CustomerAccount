@@ -22,13 +22,12 @@ jobs:
       run: dotnet test --no-build --verbosity normal
     - name: Get latest code
       uses: actions/setup-dotnet@v2
-
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
-        server: ${{ secrets.SERVER_COMPUTER_NAME }}
-        username: ${{ secrets.SERVER_USERNAME }}
-        password: ${{ secrets.SERVER_PASSWORD }}
+        server: ${{ secrets.ftp_server }}
+        username: ${{ secrets.ftp_user }}
+        password: ${{ secrets.ftp_password }}
         local-dir: ./Api/bin/Debug/net6.0/
         server-dir: customerapi/
 
