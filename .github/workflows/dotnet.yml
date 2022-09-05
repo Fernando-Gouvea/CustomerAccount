@@ -22,10 +22,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
-
-   # - name: Test
-    #  run: dotnet test --no-build --verbosity normal
+      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish # --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
     - name: Get latest code
       uses: actions/setup-dotnet@v2
@@ -37,15 +34,5 @@ jobs:
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
         local-dir: ./publish/
-       # local-dir: ./Api/bin/Release/net6.0/
         server-dir: customerapi/
-
-
-      #- name: SmarterASP.NET Web Deploy
-      #  uses: RasmusBuchholdt/simply-web-deploy@2.0.0
-      #  with:
-      #    website-name: ${{ secrets.WEBSITE_NAME }}
-      #    server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-      #    server-username: ${{ secrets.SERVER_USERNAME }}
-      #    server-password: ${{ secrets.SERVER_PASSWORD }}  
         
