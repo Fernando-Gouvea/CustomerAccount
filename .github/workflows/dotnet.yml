@@ -22,7 +22,7 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish # --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
+      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
     - name: Get latest code
       uses: actions/setup-dotnet@v2
@@ -35,5 +35,3 @@ jobs:
         password: ${{ secrets.ftp_password }}
         local-dir: ./publish/
         server-dir: customerapi/
-        #rrr
-        
