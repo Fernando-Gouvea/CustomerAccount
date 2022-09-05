@@ -25,15 +25,12 @@ jobs:
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
     - name: Clean FTP Files
-      uses: StephanThierry/ftp-delete-action@/v2.0
+      uses: taylorgibb/ftp-clean@v2.0.3
       with:
-        host: ${{ secrets.FTP_SERVER }}
-        user: ${{ secrets.FTP_USER }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        remoteFiles: "precache-manifest.*.js;logs/*.dll"
-        remoteDirectories: "/customerapi/"
-        ignoreSSL: "1"
-        #workingDir: "/public_html"
+        host: ${{secrets.ftp_server}}
+        user: "${{secrets.ftp_server}}|${{secrets.FTP_USER}}"
+        password: ${{secrets.FTP_PASSWORD}}
+        exclude: '["customerapi"]'
 
     #- name: Sync Files
     #  uses: SamKirkland/FTP-Deploy-Action@4.3.2
