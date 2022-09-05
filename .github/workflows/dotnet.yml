@@ -28,7 +28,7 @@ jobs:
       uses: taylorgibb/ftp-clean@v2.0.3
       with:
         host: ${{secrets.ftp_server}}
-        user: "${{secrets.ftp_server}}|${{secrets.FTP_USER}}"
+        user: "${{secrets.FTP_USER}}"
         password: ${{secrets.FTP_PASSWORD}}
         exclude: '["customerapi"]'
 
