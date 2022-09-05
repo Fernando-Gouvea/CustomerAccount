@@ -24,9 +24,6 @@ jobs:
     - name: Publish
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
-    - name: Get latest code
-      uses: actions/setup-dotnet@v2
-
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
