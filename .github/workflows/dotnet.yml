@@ -6,7 +6,7 @@ name: Deploy website on push
 jobs:
   web-deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
 
     - uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build
+      run: dotnet build --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Get latest code
@@ -28,7 +28,7 @@ jobs:
         server: ${{ secrets.ftp_server }}
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
-        local-dir: ./Api/bin/Debug/net6.0/
+        local-dir: ./Api/bin/Release/net6.0/
         server-dir: customerapi/
 
 
