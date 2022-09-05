@@ -1,75 +1,40 @@
-name: Build, publish and deploy project to Simply
-
-on: [push]
-
+on: 
+  push:
+    branches:
+      - main
+name: Deploy website on push
 jobs:
-  build_and_deploy:
-    runs-on: windows-latest
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+    - uses: actions/checkout@v3
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 6.0.x
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
 
-      - name: Install dependencies
-        run: dotnet restore
+    - name: Restore dependencies
+      run: dotnet restore
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
 
-      - name: Publish
-        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
+    - name: Publish
+      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
-      - name: SmarterASP.NET Web Deploy
-        uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
-        with:
-          website-name: ${{ secrets.WEBSITE_NAME }}
-          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-          server-username: ${{ secrets.SERVER_USERNAME }}
-          server-password: ${{ secrets.SERVER_PASSWORD }}  
-        
+    - name: Get latest code
+      uses: actions/setup-dotnet@v2
 
-
-
-#on: 
-#  push:
-#    branches:
-#      - main
-#name: Deploy website on push
-#jobs:
-#  web-deploy:
-#    name: Deploy
-#    runs-on: ubuntu-latest
-#    steps:
-#    - uses: actions/checkout@v3
-
-#    - name: Setup .NET
-#      uses: actions/setup-dotnet@v2
-#      with:
-#        dotnet-version: 6.0.x
-
-#    - name: Restore dependencies
-#      run: dotnet restore
-
-#    - name: Build
-#      run: dotnet build --configuration Release --no-restore
-
-#    - name: Publish
-#      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
-
-#    - name: Get latest code
-#      uses: actions/setup-dotnet@v2
-
-#    - name: Sync Files
-#      uses: SamKirkland/FTP-Deploy-Action@4.3.2
-#      with:
-#        server: ${{ secrets.ftp_server }}
-#        username: ${{ secrets.ftp_user }}
-#        password: ${{ secrets.ftp_password }}
-#        dangerous-clean-slate: true
-#        local-dir: ./publish/
-#        server-dir: customerapi/
+    - name: Sync Files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{ secrets.ftp_server }}
+        username: ${{ secrets.ftp_user }}
+        password: ${{ secrets.ftp_password }}
+        dangerous-clean-slate: true
+        local-dir: ./publish/
+        server-dir: customerapi/
        
        
