@@ -25,7 +25,7 @@ jobs:
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
     - name: Clean FTP Files
-      uses: StephanThierry/ftp-delete-action@/v2.1
+      uses: StephanThierry/ftp-delete-action@/v2.0
       with:
         host: ${{ secrets.FTP_SERVER }}
         user: ${{ secrets.FTP_USER }}
