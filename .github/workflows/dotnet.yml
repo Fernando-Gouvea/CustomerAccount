@@ -1,36 +1,36 @@
-name: Build, publish and deploy project to Simply
-
-on: [push]
-
+on: 
+  push:
+    branches:
+      - main
+name: Deploy website on push
 jobs:
-  build_and_deploy:
-    runs-on: windows-latest
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
 
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
-       
-      - name: Install dependencies
-        run: dotnet restore
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    - name: Get latest code
+      uses: actions/setup-dotnet@v2
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Publish
-        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
-
-      - name: Test with .NET
-        run: dotnet test
-
-      - name: Sync Files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.2
-        with:
-          server: ${{ secrets.SERVER_COMPUTER_NAME }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          password: ${{ secrets.SERVER_PASSWORD }}
-          local-dir: ./Api/bin/Debug/net6.0/
-          server-dir: customerapi/
+    - name: Sync Files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{ secrets.SERVER_COMPUTER_NAME }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        local-dir: ./Api/bin/Debug/net6.0/
+        server-dir: customerapi/
 
 
       #- name: SmarterASP.NET Web Deploy
