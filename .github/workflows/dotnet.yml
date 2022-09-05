@@ -1,33 +1,35 @@
-on: 
-  push:
-    branches:
-      - main
-name: Deploy website on push
-jobs:
-  web-deploy:
-    name: Deploy
-    runs-on: ubuntu-latest
-    steps:
+name: Build, publish and deploy project to Simply
 
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v2
-      with:
-        dotnet-version: 6.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
-    - name: Get latest code
-      uses: actions/setup-dotnet@v2
-    - name: Sync Files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
-      with:
-        server: ${{ secrets.ftp_server }}
-        username: ${{ secrets.ftp_user }}
-        password: ${{ secrets.ftp_password }}
-        local-dir: ./Api/bin/Debug/net6.0/
-        server-dir: customerapi/
-      
+on: [push]
+
+jobs:
+  build_and_deploy:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 6.0
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
+
+      - name: Publish
+        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --framework netcoreapp6.0 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
+
+      - name: Test with .NET
+        run: dotnet test
+
+      - name: SmarterASP.NET Web Deploy
+        uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
+        with:
+          website-name: ${{ secrets.WEBSITE_NAME }}
+          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+          server-username: ${{ secrets.SERVER_USERNAME }}
+          server-password: ${{ secrets.SERVER_PASSWORD }}  
+        
