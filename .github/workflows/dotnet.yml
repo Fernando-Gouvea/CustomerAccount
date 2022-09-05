@@ -6,7 +6,7 @@ name: Deploy website on push
 jobs:
   web-deploy:
     name: Deploy
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
 
