@@ -34,5 +34,5 @@ jobs:
         username: ${{ secrets.ftp_user }}
         password: ${{ secrets.ftp_password }}
         dangerous-clean-slate: true
-        local-dir: ./publish/
-        server-dir: customerapi/
+        #local-dir: ./publish/
+        #server-dir: customerapi/
