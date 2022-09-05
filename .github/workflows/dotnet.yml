@@ -10,7 +10,9 @@ jobs:
 
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v1
-      
+        with:
+          dotnet-version: 6.0.x
+
       - name: Install dependencies
         run: dotnet restore
 
@@ -18,7 +20,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish
-        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --framework netcoreapp6.0 --output ./publish
+        run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
       - name: SmarterASP.NET Web Deploy
         uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
