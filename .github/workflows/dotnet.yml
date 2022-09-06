@@ -31,7 +31,7 @@ jobs:
     #    user: "${{secrets.FTP_USER}}"
     #    password: ${{secrets.FTP_PASSWORD}}
     #    exclude: '["/customerapi"]'
-
+    #
     - name: Sync Files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
