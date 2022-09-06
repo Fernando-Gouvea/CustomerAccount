@@ -35,7 +35,7 @@ jobs:
         server-dir: customerapi/
         port: 8172 
 
-    #
+    
     #- name: Sync Files FTP
     #  uses: SamKirkland/FTP-Deploy-Action@4.3.2
     #  with:
