@@ -24,13 +24,16 @@ jobs:
     - name: Publish
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
-    - name: Fast FTP Action
-      uses: anvil-solutions/Fast-FTP-Action@2.1.3
+   - name: Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.ftp_server }}
-        port: 8172
         username: ${{ secrets.ftp_user }}
-        password: ${{ secrets.FTP_PASSWORD }}
+        password: ${{ secrets.ftp_password }}
+        dangerous-clean-slate: true
+        local-dir: ./publish/
+        server-dir: customerapi/
+        port: 8172 
 
 
     #- name: Sync Files FTP
