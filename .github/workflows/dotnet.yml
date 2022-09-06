@@ -24,15 +24,10 @@ jobs:
     - name: Publish
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
-    #- name: Clean FTP Files
-    #  uses: taylorgibb/ftp-clean@v2.0.3
-    #  with:
-    #    host: ${{secrets.ftp_server}}
-    #    user: "${{secrets.FTP_USER}}"
-    #    password: ${{secrets.FTP_PASSWORD}}
-    #    exclude: '["/customerapi"]'
-    
-    - name: Sync Files
+   
+        
+
+    - name: Sync Files FTP
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.ftp_server }}
