@@ -35,25 +35,25 @@ jobs:
     #    server-password: ${{ secrets.SERVER_PASSWORD }}  
       
 
-    #- name: Deploy to Simply
-    #  uses: RasmusBuchholdt/simply-web-deploy@2.0.0
-    #  with:
-    #    website-name: ${{ secrets.WEBSITE_NAME }}
-    #    server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-    #    server-username: ${{ secrets.SERVER_USERNAME }}
-    #    server-password: ${{ secrets.SERVER_PASSWORD }}
+    - name: Deploy to Simply
+      uses: RasmusBuchholdt/simply-web-deploy@2.0.0
+      with:
+        website-name: ${{ secrets.WEBSITE_NAME }}
+        server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
+        server-username: ${{ secrets.SERVER_USERNAME }}
+        server-password: ${{ secrets.SERVER_PASSWORD }}
     #   # source-path: ./publish/
 
 
 
 
-    - name: IIS Deploy
-      uses: ChristopheLav/iis-deploy@v1
-      with:
-        website-name: ${{ secrets.WEBSITE_NAME }}
-        msdeploy-service-url: ${{ secrets.SERVER_COMPUTER_NAME }}
-        msdeploy-username: ${{ secrets.SERVER_USERNAME }}
-        msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
+    #- name: IIS Deploy
+    #  uses: ChristopheLav/iis-deploy@v1
+    #  with:
+    #    website-name: ${{ secrets.WEBSITE_NAME }}
+    #    msdeploy-service-url: ${{ secrets.SERVER_COMPUTER_NAME }}
+    #    msdeploy-username: ${{ secrets.SERVER_USERNAME }}
+    #    msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
     #    source-path: ./publish/
 
     
