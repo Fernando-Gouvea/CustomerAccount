@@ -24,16 +24,14 @@ jobs:
     - name: Publish
       run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
 
-    - name: Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+    - name: IIS Deploy
+      uses: ChristopheLav/iis-deploy@v1
       with:
-        server: ${{ secrets.ftp_server }}
-        username: ${{ secrets.ftp_user }}
-        password: ${{ secrets.ftp_password }}
-        dangerous-clean-slate: true
-        local-dir: ./publish/
-        server-dir: customerapi/
-        port: 8172 
+        website-name: ${{ secrets.WEBSITE_NAME }}
+        msdeploy-service-url: ${{ secrets.SERVER_COMPUTER_NAME }}
+        msdeploy-username: ${{ secrets.SERVER_USERNAME }}
+        msdeploy-password: ${{ secrets.SERVER_PASSWORD }}
+        source-path: ./publish/
 
     
     #- name: Sync Files FTP
