@@ -6,7 +6,7 @@ name: Deploy website on push
 jobs:
   web-deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v3
 
@@ -22,16 +22,9 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Publish
-      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --output ./publish
+      run: dotnet publish Api/CustomerAccountApi.csproj --configuration Release --framework netcoreapp3.1 --output ./publish --runtime win-x86 --self-contained true -p:PublishTrimmed=false -p:PublishSingleFile=false
 
-    #- name: SmarterASP.NET Web Deploy
-    #  uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
-    #  with:
-    #    website-name: ${{ secrets.WEBSITE_NAME }}
-    #    server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-    #    server-username: ${{ secrets.SERVER_USERNAME }}
-    #    server-password: ${{ secrets.SERVER_PASSWORD }}
-       
+  
 
     - name: SmarterASP.NET Web Deploy
       uses: jahbenjah/SmarterASP.NET-web-deploy@1.0.0.alpha.8
@@ -40,7 +33,7 @@ jobs:
         server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
         server-username: ${{ secrets.SERVER_USERNAME }}
         server-password: ${{ secrets.SERVER_PASSWORD }}  
-        source-path: '\publish\'
+      #  source-path: '\publish\'
 
     #- name: Deploy to Simply
     #  uses: RasmusBuchholdt/simply-web-deploy@2.0.0
